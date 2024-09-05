@@ -1,0 +1,31 @@
+.root {
+    @apply h-screen w-screen flex flex-col;
+}
+
+.container {
+    @apply w-full h-full flex overflow-auto;
+}
+
+.container .content {
+    @apply px-4 grow h-full flex flex-col items-center;
+}
+
+.content .wrapper {
+    @apply grow max-w-[512px] w-full;
+}
+
+.container .back {
+    @apply p-10 pb-28 hidden xl:flex w-2/5 bg-auth-gradient text-white;
+}
+
+.back .text {
+    @apply flex flex-col gap-y-3.5 justify-end;
+}
+
+.text h3 {
+    @apply font-bold text-5xl leading-[56px];
+}
+
+.text p {
+    @apply font-semibold text-sm leading-5;
+}

@@ -1,0 +1,11 @@
+.root {
+    @apply h-screen w-screen flex;
+}
+
+.root .content {
+    @apply grow flex flex-col bg-primary-white;
+}
+
+.content .main {
+    @apply p-5 grow;
+}

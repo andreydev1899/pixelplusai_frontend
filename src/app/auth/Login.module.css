@@ -1,0 +1,63 @@
+.root {
+    @apply h-full flex flex-col items-center;
+}
+
+.root .logo {
+    @apply pt-12;
+}
+
+.root .form {
+    @apply grow flex flex-col justify-center py-10;
+}
+
+.form .intro {
+    @apply text-center mb-10;
+}
+
+.form .main {
+    @apply flex flex-col gap-y-4;
+}
+
+.intro > p {
+    @apply font-bold text-4xl leading-10 mb-3;
+}
+
+.intro > span {
+    @apply text-sm text-primary-disabled;
+}
+
+.credentials .elements {
+    @apply flex flex-col gap-y-4 mb-10;
+}
+
+.credentials .remember {
+    @apply flex items-center justify-between;
+}
+
+.remember > p {
+    @apply font-bold text-sm leading-5 text-highlight-text cursor-pointer;
+}
+
+.credentials .signup {
+    @apply leading-6 mt-2 text-center;
+}
+
+.signup span {
+    @apply font-bold text-highlight-text cursor-pointer;
+}
+
+.main .divider {
+    @apply text-center text-sm leading-5 text-primary-disabled;
+}
+
+.main .buttons {
+    @apply flex flex-col gap-y-2;
+}
+
+.contact {
+    @apply pb-[60px] text-sm text-center leading-5;
+}
+
+.contact span {
+    @apply font-bold text-highlight-text cursor-pointer;
+}
