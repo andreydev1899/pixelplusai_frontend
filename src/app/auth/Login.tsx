@@ -27,31 +27,47 @@ const defaultValues: LoginUserDto = {
   password: "",
 };
 
+interface ErrorDto {
+  email: string[];
+  password: string[];
+}
+
+const defaultErrors: ErrorDto = {
+  email: [],
+  password: [],
+};
+
 function Login() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const [isPassShown, setIsPassShown] = useState<boolean>(false);
+  const [isFormSubmitted, setIsFormSubmitted] = useState<boolean>(false);
   const [loginUser, setLoginUser] = useState<LoginUserDto>(defaultValues);
+  const [errors, setErrors] = useState<ErrorDto>(defaultErrors);
 
   const handleUserChange = (e: ChangeEvent<HTMLInputElement>) => {
     setLoginUser({ ...loginUser, [e.target.name]: e.target.value });
   };
 
   const handleLoginClick = () => {
-    apiClient.post("/auth/email/login", loginUser).then((response: any) => {
-      const { refreshToken, token, user } = response;
-      // const { status } = user;
-      // if (status.name === "Active") {
-      toast.success("Login success.");
-      setupToken({ accessToken: token, refreshToken });
-      dispatch(setUserAuth(true));
-      dispatch(setUserProfile(user));
-      navigate("/");
-      // } else {
-      //   toast.error("Please wait for the approve.");
-      // }
-    });
+    if (Object.values(errors).every((error) => error.length === 0)) {
+      apiClient.post("/auth/email/login", loginUser).then((response: any) => {
+        const { refreshToken, token, user } = response;
+        // const { status } = user;
+        // if (status.name === "Active") {
+        toast.success("Login success.");
+        setupToken({ accessToken: token, refreshToken });
+        dispatch(setUserAuth(true));
+        dispatch(setUserProfile(user));
+        navigate("/");
+        // } else {
+        //   toast.error("Please wait for the approve.");
+        // }
+      });
+    } else {
+      setIsFormSubmitted(true);
+    }
   };
 
   const handleGoogleLoginSuccess = (tokenResponse: any) => {
@@ -101,6 +117,14 @@ function Login() {
                   <FaRegEnvelope size={14} className="text-primary-text" />
                 }
                 onChange={handleUserChange}
+                rules={{
+                  validator: "email",
+                }}
+                errors={errors["email"]}
+                setErrors={(fieldErrors: string[]) => {
+                  setErrors({ ...errors, email: fieldErrors });
+                }}
+                formSubmitted={isFormSubmitted}
               />
               <FormControl
                 type={isPassShown ? "text" : "password"}
@@ -129,6 +153,14 @@ function Login() {
                   )
                 }
                 onChange={handleUserChange}
+                rules={{
+                  minLength: 6,
+                }}
+                errors={errors["password"]}
+                setErrors={(fieldErrors: string[]) => {
+                  setErrors({ ...errors, password: fieldErrors });
+                }}
+                formSubmitted={isFormSubmitted}
               />
               <div className={classes.remember}>
                 <Checkbox label="Remember me" />

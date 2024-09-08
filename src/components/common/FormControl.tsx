@@ -12,6 +12,10 @@ interface FormControlProps {
   startAdornment?: React.ReactNode;
   endAdornment?: React.ReactNode;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  rules?: any;
+  errors?: string[];
+  setErrors?: (errors: string[]) => void;
+  formSubmitted?: boolean;
 }
 
 function FormControl({
@@ -19,7 +23,6 @@ function FormControl({
   name = "",
   label = "",
   placeholder = "",
-  defaultValue = "",
   startAdornment,
   endAdornment,
   ...props
@@ -31,7 +34,6 @@ function FormControl({
         type={type}
         name={name}
         placeholder={placeholder}
-        defaultValue={defaultValue}
         startAdornment={startAdornment}
         endAdornment={endAdornment}
         {...props}

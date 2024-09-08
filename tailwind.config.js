@@ -28,6 +28,12 @@ module.exports = {
         danger: {
           DEFAULT: "#FF220C",
         },
+        warning: {
+          DEFAULT: "#ED9902",
+        },
+        success: {
+          DEFAULT: "#2E933C",
+        },
         dark: {
           DEFAULT: "#020420",
         },

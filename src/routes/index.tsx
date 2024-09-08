@@ -10,6 +10,9 @@ import Verification from "@/app/auth/Verification";
 import UpdatePassword from "@/app/auth/UpdatePassword";
 import Logout from "@/app/auth/Logout";
 
+import UserManagement from "@/app/main/UserManagement";
+import Dashboard from "@/app/main/Dashboard";
+
 function AppRoutes() {
   const location = useLocation();
 
@@ -24,8 +27,8 @@ function AppRoutes() {
         <Route path="update-password" element={<UpdatePassword />} />
       </Route>
       <Route path="" element={<MainLayout />}>
-        <Route index element={<Navigate to="" />} />
-        <Route path="" element={<></>} />
+        <Route index element={<Dashboard />} />
+        <Route path="/manage" element={<UserManagement />} />
         <Route path="/clients" element={<></>} />
         <Route path="/assets" element={<></>} />
         <Route path="/history" element={<></>} />
