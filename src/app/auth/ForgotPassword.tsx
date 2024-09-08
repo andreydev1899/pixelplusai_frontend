@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { ChevronLeftIcon } from "@heroicons/react/20/solid";
+import { toast } from "react-hot-toast";
 import { FaRegEnvelope } from "react-icons/fa6";
 
 import FormControl from "@/components/common/FormControl";
@@ -7,9 +8,24 @@ import Logo from "@/components/common/Logo";
 import Button from "@/components/forms/Button";
 
 import classes from "./ForgotPassword.module.css";
+import { useState } from "react";
+import apiClient from "@/libs/api";
+import { useAppDispatch } from "@/store";
+import { setForgotEmail } from "@/store/slices";
 
 function ForgotPassword() {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const [email, setEmail] = useState<string>("");
+
+  const handleSubmitClick = () => {
+    dispatch(setForgotEmail(email));
+    apiClient.post("/auth/forgot/password", { email }).then(() => {
+      toast.success(`Verification code sent to ${email}`);
+      navigate("/auth/verification");
+    });
+  };
 
   return (
     <div className={classes.root}>
@@ -32,13 +48,15 @@ function ForgotPassword() {
                 startAdornment={
                   <FaRegEnvelope size={16} className="text-primary-text" />
                 }
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <Button>Submit</Button>
+            <Button onClick={handleSubmitClick}>Submit</Button>
             <p
               className={classes.backToPage}
               onClick={() => {
-                navigate("");
+                navigate("/auth/forgot-password");
               }}
             >
               <span>

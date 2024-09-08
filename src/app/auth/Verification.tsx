@@ -30,7 +30,13 @@ function Verification() {
                 Didn’t receive a code? <span>Resend</span>
               </p>
             </div>
-            <Button>Verify</Button>
+            <Button
+              onClick={() => {
+                navigate("/auth/update-password");
+              }}
+            >
+              Verify
+            </Button>
             <p
               className={classes.backToPage}
               onClick={() => {

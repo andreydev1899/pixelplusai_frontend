@@ -8,6 +8,7 @@ import Register from "@/app/auth/Register";
 import ForgotPassword from "@/app/auth/ForgotPassword";
 import Verification from "@/app/auth/Verification";
 import UpdatePassword from "@/app/auth/UpdatePassword";
+import Logout from "@/app/auth/Logout";
 
 function AppRoutes() {
   const location = useLocation();
@@ -31,7 +32,7 @@ function AppRoutes() {
         <Route path="/help-center" element={<></>} />
         <Route path="/notifications" element={<></>} />
         <Route path="/settings" element={<></>} />
-        <Route path="/logout" element={<></>} />
+        <Route path="/logout" element={<Logout />} />
       </Route>
     </Routes>
   );
